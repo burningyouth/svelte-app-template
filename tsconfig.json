@@ -1,8 +1,13 @@
 {
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2017"
+  },
   "extends": "@tsconfig/svelte/tsconfig.json",
   "include": [
     "src/**/*"
   ],
+  "sourceMap": true,
   "exclude": [
     "node_modules/*",
     "__sapper__/*",

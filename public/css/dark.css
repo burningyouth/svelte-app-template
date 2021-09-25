@@ -1,0 +1,13 @@
+:root {
+    --colors-grey-800: #fff;
+    --colors-grey-700: #e0e0e0;
+    --colors-grey-600: #c2c2c2;
+    --colors-grey-500: #a3a3a3;
+    --colors-grey-400: #858585;
+    --colors-grey-300: #666666;
+    --colors-grey-200: #474747;
+    --colors-grey-100: #292929;
+    --colors-warning: #DC493A;
+    --colors-info: #3DA5D9;
+    --colors-success: #6D9C6D;
+}
