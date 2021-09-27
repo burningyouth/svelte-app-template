@@ -23,7 +23,7 @@
     animation-iteration-count: infinite;
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
-    background-color: var(--colors-grey-300);
+    background-color: var(--circular-color);
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -38,9 +38,17 @@
   }
 </style>
 
-<script></script>
+<script lang="ts">
+  const colorToVar = {
+    primary: "var(--colors-grey-800)",
+    secondary: "var(--colors-grey-500)",
+    tertiary: "var(--colors-grey-200)",
+  };
 
-<div {...$$restProps}>
+  export let color: "primary" | "secondary" | "tertiary" = "primary";
+</script>
+
+<div {...$$restProps} style="--circular-color: {colorToVar[color]}">
   <span class="loader-item"></span>
   <span class="loader-item"></span>
   <span class="loader-item"></span>

@@ -22,6 +22,7 @@ module.exports = {
     "import/no-mutable-exports": 0,
     "no-undef": 0,
     "no-unused-vars": 0,
+    "import/first": 0,
   },
   settings: {
     "svelte3/typescript": () => require("typescript"), // pass the TypeScript package to the Svelte plugin

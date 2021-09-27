@@ -75,10 +75,19 @@
     lg: "48px",
   };
 
-  export let color: Color = "var(--colors-grey-200)";
-  export let size: "sm" | "md" | "lg" = "md";
+  const colorToVar = {
+    primary: "var(--colors-grey-800)",
+    secondary: "var(--colors-grey-500)",
+    tertiary: "var(--colors-grey-200)",
+  };
+
+  export let color: "primary" | "secondary" | "tertiary" = "primary";
+  export let size: Omit<BasicBreakpoints, "xs" | "xl"> = "md";
 </script>
 
-<div style="--circular-color: {color}; --circular-size: {sizeToPx[size]}">
+<div
+  style="--circular-color: {colorToVar[color]}; --circular-size: {sizeToPx[
+    size
+  ]}">
   <div class="inner"></div>
 </div>
