@@ -6,6 +6,8 @@ type Response = {
     bio: string;
     login: string;
     name: string;
+    email: string;
+    url: URI;
   };
 };
 
@@ -14,6 +16,8 @@ export type Viewer = {
   bio: string;
   login: string;
   name: string;
+  email: string;
+  url: URI;
 };
 
 const viewerResponse: Promise<Response> = octokit.graphql(`{
@@ -22,6 +26,8 @@ const viewerResponse: Promise<Response> = octokit.graphql(`{
     bio
     login
     name
+    email
+    url
  } 
 }`);
 

@@ -25,6 +25,7 @@
 
   const onLabelClick = (event: any) => {
     if (!labels.includes(event.detail.label)) {
+      window.scrollTo({ top: 0 });
       labels = [...labels, event.detail.label];
       filteredRepos = repos.filter((repo) =>
         repo.repositoryTopics.find((topic) => topic.name === event.detail.label)
@@ -36,7 +37,8 @@
     const index = labels.indexOf(label);
     if (index !== -1) {
       if (labels.length > 1) {
-        labels = [...labels.splice(index - 1, 1)];
+        labels.splice(index, 1);
+        labels = labels.slice();
         filteredRepos = repos.filter((repo) =>
           labels.some((label) =>
             repo.repositoryTopics.find((topic) => topic.name === label)
@@ -60,7 +62,7 @@
   {#if labels.length}
     <div class="labels">
       {#each labels as label}
-        <Chip removable on:remove="{() => onRemoveLabel(label)}">
+        <Chip removable on:click="{() => onRemoveLabel(label)}">
           {label}
         </Chip>
       {/each}

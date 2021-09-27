@@ -21,6 +21,10 @@
     cursor: pointer;
   }
 
+  :global(.chip--link) {
+    color: var(--colors-link) !important;
+  }
+
   @media (max-width: 720px) {
     .content {
       flex-direction: column-reverse;
@@ -30,9 +34,9 @@
 </style>
 
 <script lang="ts">
-  import { Label } from "../08-shared/github/viewer";
   import Chip from "../08-shared/ui-kit/Chip.svelte";
   import { createEventDispatcher } from "svelte";
+  import type { Label } from "../08-shared/github/repositories";
 
   const dispatch = createEventDispatcher();
 
@@ -67,7 +71,11 @@
           </Chip>
         {/each}
         {#if deployment}
-          <Chip><a target="_blank" href="{deployment}">Deployment</a></Chip>
+          <Chip
+            on:click="{() => window.open(deployment, '_blank')}"
+            class="chip chip--link"
+            >Deployment
+          </Chip>
         {/if}
       </div>
     {/if}

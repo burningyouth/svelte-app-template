@@ -11,10 +11,20 @@
     border-radius: 12px;
     font-size: 0.85rem;
     text-transform: capitalize;
+    transition: border-color 0.05s ease-in;
+    cursor: pointer;
   }
 
-  :global(.chip--close-icon) {
+  .root:focus {
+    outline: none;
+    border-color: var(--colors-grey-500);
+  }
+
+  .chip--close-icon {
+    color: inherit;
     cursor: pointer;
+    border: none;
+    background: none;
   }
 </style>
 
@@ -30,9 +40,15 @@
   };
 </script>
 
-<span {...$$props} on:click class="root {$$props.class}">
+<button {...$$props} on:click class="root {$$props.class}">
   <slot>Undefined</slot>
   {#if removable}
-    <Close on:click="{onRemoveClick}" class="chip--close-icon" />
+    <button
+      {...$$props}
+      on:click="{onRemoveClick}"
+      tabindex="-1"
+      class="chip--close-icon">
+      <Close />
+    </button>
   {/if}
-</span>
+</button>

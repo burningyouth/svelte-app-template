@@ -2,5 +2,5 @@
 import { Octokit } from "@octokit/core";
 
 export const octokit = new Octokit({
-  auth: `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`,
+  auth: `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`,
 });
