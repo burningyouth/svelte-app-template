@@ -6,18 +6,20 @@
 </style>
 
 <script lang="ts">
-  import { NormalizedViewer, viewer } from "../08-shared/github/viewer";
   import Post from "../06-features/Post.svelte";
   import { onMount } from "svelte";
   import Chip from "../08-shared/ui-kit/Chip.svelte";
+  import { Repositories, repositories } from "../08-shared/github/repositories";
+  import LoadingScreen from "../06-features/LoadingScreen.svelte";
+  import Error from "../08-shared/ui-kit/Error.svelte";
 
   let labels = [];
-  let repos: NormalizedViewer["repositories"]["nodes"] = [];
+  let repos: Repositories["nodes"] = [];
 
   let filteredRepos = repos;
 
   onMount(async () => {
-    repos = (await viewer).repositories.nodes;
+    repos = (await repositories).nodes;
     filteredRepos = repos;
   });
 
@@ -52,22 +54,28 @@
   <title>Мои работы</title>
 </svelte:head>
 
-{#if labels.length}
-  <div class="labels">
-    {#each labels as label}
-      <Chip removable on:remove="{() => onRemoveLabel(label)}">
-        {label}
-      </Chip>
-    {/each}
-  </div>
-{/if}
-{#each filteredRepos as repository}
-  {#if repository.description}
-    <Post
-      on:labelClick="{onLabelClick}"
-      title="{repository.description}"
-      deployment="{repository.homepageUrl}"
-      date="{repository.createdAt}"
-      labels="{repository.repositoryTopics || []}" />
+{#await repositories}
+  <LoadingScreen height="25vh" />
+{:then value}
+  {#if labels.length}
+    <div class="labels">
+      {#each labels as label}
+        <Chip removable on:remove="{() => onRemoveLabel(label)}">
+          {label}
+        </Chip>
+      {/each}
+    </div>
   {/if}
-{/each}
+  {#each filteredRepos as repository}
+    {#if repository.description}
+      <Post
+        on:labelClick="{onLabelClick}"
+        title="{repository.description}"
+        deployment="{repository.homepageUrl}"
+        date="{repository.createdAt}"
+        labels="{repository.repositoryTopics || []}" />
+    {/if}
+  {/each}
+{:catch error}
+  <Error error="{error}" />
+{/await}

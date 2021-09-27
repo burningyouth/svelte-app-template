@@ -8,6 +8,13 @@
     padding-right: var(--gap-400);
   }
 
+  @media (max-width: 500px) {
+    div {
+      padding-left: var(--gap-300);
+      padding-right: var(--gap-300);
+    }
+  }
+
   .disableGutters {
     padding-left: 0;
     padding-right: 0;

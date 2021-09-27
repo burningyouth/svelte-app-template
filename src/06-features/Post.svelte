@@ -8,15 +8,24 @@
     justify-content: space-between;
     align-items: center;
     margin-top: var(--gap-300);
+    gap: var(--gap-300);
   }
 
   .labels {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--gap-200);
   }
 
   :global(.chip) {
     cursor: pointer;
+  }
+
+  @media (max-width: 720px) {
+    .content {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
   }
 </style>
 
@@ -58,7 +67,7 @@
           </Chip>
         {/each}
         {#if deployment}
-          <Chip><a target="_blank" href="{deployment}">Github Pages</a></Chip>
+          <Chip><a target="_blank" href="{deployment}">Deployment</a></Chip>
         {/if}
       </div>
     {/if}
