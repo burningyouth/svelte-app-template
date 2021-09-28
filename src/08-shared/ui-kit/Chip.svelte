@@ -30,6 +30,16 @@
     border: none;
     background: none;
   }
+
+  .sm {
+    padding: 0 var(--gap-100);
+  }
+
+  .lg {
+    padding: var(--gap-100) var(--gap-200);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
 </style>
 
 <script lang="ts">
@@ -37,6 +47,7 @@
   import Close from "./icons/Close.svelte";
 
   export let removable = false;
+  export let size: Omit<BasicBreakpoints, "xs" | "xl"> = "md";
   const dispatch = createEventDispatcher();
 
   const onRemoveClick = () => {
@@ -44,7 +55,7 @@
   };
 </script>
 
-<button {...$$props} on:click class="root {$$props.class}">
+<button {...$$props} on:click class="root {$$props.class} {size}">
   <slot>Undefined</slot>
   {#if removable}
     <button

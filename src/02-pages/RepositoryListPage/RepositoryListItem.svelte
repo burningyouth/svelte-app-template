@@ -33,6 +33,7 @@
     .content {
       flex-direction: column-reverse;
       align-items: flex-start;
+      margin-top: var(--gap-300);
     }
   }
 </style>
@@ -90,13 +91,6 @@
               {topic.name}
             </Chip>
           {/each}
-          {#if repoData.homepageUrl}
-            <Chip
-              on:click="{() => window.open(repoData.homepageUrl, '_blank')}"
-              class="chip chip--link"
-              >Deployment
-            </Chip>
-          {/if}
         </div>
       {/if}
     {:else}

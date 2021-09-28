@@ -7,8 +7,8 @@
 
   @media (max-width: 500px) {
     img {
-      width: 64px;
-      height: 64px;
+      width: 80px;
+      height: 80px;
     }
   }
 </style>

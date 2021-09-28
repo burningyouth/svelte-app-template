@@ -12,8 +12,14 @@
 
   .repo-info {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     gap: var(--gap-200);
+    margin-bottom: var(--gap-300);
+  }
+
+  :global(.detail-chip) {
+    color: var(--colors-grey-800);
   }
 </style>
 
@@ -28,6 +34,8 @@
   import Error from "../08-shared/ui-kit/Error.svelte";
   import marked from "marked";
   import Dots from "../08-shared/ui-kit/loaders/Dots.svelte";
+  import Chip from "../08-shared/ui-kit/Chip.svelte";
+  import Explore from "../08-shared/ui-kit/icons/Explore.svelte";
 
   export let repoName = "";
   let loading = true;
@@ -44,8 +52,7 @@
 
       repoDetailsEl.innerHTML = marked(await results[0].text());
       if (results[1]) {
-        // eslint-disable-next-line require-atomic-updates
-        $currentRepository = results[1];
+        currentRepository.set(results[1]);
       }
     } catch (error_) {
       console.log(error_);
@@ -58,23 +65,37 @@
 </script>
 
 <svelte:head>
-  <title>Репозиторий - {repoName}</title>
+  <title>{$currentRepository?.description ?? "Репозиторий"}</title>
 </svelte:head>
 
-{#if loading}
-  <div class="loader">
-    <Dots />
-  </div>
-{:else if error}
-  <Error message="{error}" />
-{:else if $currentRepository}
-  <section class="repo-info">
-    <h2 class="title">
-      {$currentRepository.description}
-    </h2>
-    <div class="date">
-      {$currentRepository.createdAt} - {$currentRepository.updatedAt}
+<div>
+  {#if loading}
+    <div class="loader">
+      <Dots />
     </div>
-  </section>
-{/if}
-<div class="markdown-body" class:loading bind:this="{repoDetailsEl}"></div>
+  {:else if error}
+    <Error message="{error}" />
+  {:else if $currentRepository}
+    <section class="repo-info">
+      <div>
+        <h2 class="title">
+          {$currentRepository.description}
+        </h2>
+        <div class="date">
+          {$currentRepository.createdAt}
+        </div>
+      </div>
+      <div>
+        <Chip
+          size="lg"
+          on:click="{() =>
+            window.open($currentRepository.homepageUrl, '_blank')}"
+          class="detail-chip">
+          <Explore size="1.45em" color="var(--colors-grey-500)" />
+          Deployment
+        </Chip>
+      </div>
+    </section>
+  {/if}
+  <div class="markdown-body" class:loading bind:this="{repoDetailsEl}"></div>
+</div>

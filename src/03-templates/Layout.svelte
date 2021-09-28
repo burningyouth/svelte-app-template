@@ -42,6 +42,21 @@
   :global(.main-content) {
     padding-bottom: var(--gap-400);
   }
+
+  @media (max-width: 620px) {
+    header {
+      margin-top: var(--gap-200);
+      margin-bottom: var(--gap-200);
+    }
+
+    .viewer-info {
+      gap: var(--gap-100);
+    }
+
+    main {
+      gap: var(--gap-300);
+    }
+  }
 </style>
 
 <script lang="ts">
@@ -54,6 +69,7 @@
   import Email from "../08-shared/ui-kit/icons/Email.svelte";
   import Error from "../08-shared/ui-kit/Error.svelte";
   import Dots from "../08-shared/ui-kit/loaders/Dots.svelte";
+  import { link } from "svelte-routing";
 </script>
 
 {#await viewer}
@@ -63,7 +79,9 @@
 {:then value}
   <Container width="md" class="main-content">
     <header>
-      <Avatar src="{value.avatarUrl}" alt="{value.login}" />
+      <a href="/" use:link>
+        <Avatar src="{value.avatarUrl}" alt="{value.login}" />
+      </a>
       <div class="viewer-info">
         <h3>
           {value.name}
