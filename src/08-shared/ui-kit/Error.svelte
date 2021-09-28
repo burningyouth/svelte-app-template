@@ -1,10 +1,11 @@
 <style>
   div {
     display: flex;
-
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    gap: var(--gap-300);
+    height: var(--height);
   }
 
   div > p {
@@ -13,11 +14,13 @@
 </style>
 
 <script lang="ts">
-  export let error: Error;
+  export let message = "";
+  export let title = "Упс, произошла ошибка!";
+  export let height = "20vh";
 </script>
 
-{#if error}
-  <div>
-    <p>Что-то пошло не так: {error.message}</p>
-  </div>
-{/if}
+<div style="--height: {height}">
+  <h2>{title}</h2>
+  {#if message}<p>{message}</p>{/if}
+  <slot />
+</div>

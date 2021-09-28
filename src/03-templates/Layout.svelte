@@ -18,6 +18,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-400);
+    height: calc(100% - 128px);
   }
 
   .social a {
@@ -31,31 +32,42 @@
     color: var(--colors-grey-800);
   }
 
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
   :global(.main-content) {
     padding-bottom: var(--gap-400);
   }
 </style>
 
 <script lang="ts">
-  import { viewer } from "../08-shared/github/viewer";
+  import { viewer } from "../07-entities/viewer";
   import Avatar from "../08-shared/ui-kit/Avatar.svelte";
   import Container from "../08-shared/ui-kit/Container.svelte";
-  import LoadingScreen from "../06-features/LoadingScreen.svelte";
-  import Error from "../08-shared/ui-kit/Error.svelte";
   import Telegram from "../08-shared/ui-kit/icons/Telegram.svelte";
   import Whatsapp from "../08-shared/ui-kit/icons/Whatsapp.svelte";
   import Github from "../08-shared/ui-kit/icons/Github.svelte";
   import Email from "../08-shared/ui-kit/icons/Email.svelte";
+  import Error from "../08-shared/ui-kit/Error.svelte";
+  import Dots from "../08-shared/ui-kit/loaders/Dots.svelte";
 </script>
 
 {#await viewer}
-  <LoadingScreen />
+  <div class="loader">
+    <Dots />
+  </div>
 {:then value}
   <Container width="md" class="main-content">
     <header>
       <Avatar src="{value.avatarUrl}" alt="{value.login}" />
       <div class="viewer-info">
-        <h3>{value.name}</h3>
+        <h3>
+          {value.name}
+        </h3>
         {value.bio}
         <div class="social">
           {#if value.email}<a
@@ -84,5 +96,5 @@
     </main>
   </Container>
 {:catch error}
-  <Error error="{error}" />
+  <Error message="{error.message}" />
 {/await}

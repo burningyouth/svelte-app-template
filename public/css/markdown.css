@@ -1,0 +1,21 @@
+.markdown-body h2, .markdown-body h1 {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--colors-grey-200);
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-weight: 600;
+
+}
+
+.markdown-body p, .markdown-body blockquote, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body table, .markdown-body pre, .markdown-body details {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}

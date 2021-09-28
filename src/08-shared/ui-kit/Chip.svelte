@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--gap-100);
-    padding: var(--gap-100) var(--gap-200);
+    padding: 0 var(--gap-200);
     background-color: rgba(0, 0, 0, 0.025);
     border: 1px solid var(--colors-grey-200);
     color: var(--colors-grey-500);
@@ -13,6 +13,10 @@
     text-transform: capitalize;
     transition: border-color 0.05s ease-in;
     cursor: pointer;
+  }
+
+  .root * {
+    line-height: 1;
   }
 
   .root:focus {

@@ -33,6 +33,9 @@
   export let disableGutters = false;
 </script>
 
-<div {...$$restProps} style="--width: {widthToVar[width]}" class:disableGutters>
+<div
+  {...$$restProps}
+  style="--width: {widthToVar[width]};"
+  class:disableGutters>
   <slot />
 </div>
