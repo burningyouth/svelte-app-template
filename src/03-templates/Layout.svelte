@@ -84,7 +84,7 @@
     </div>
   {:then value}
     <section class="about">
-      <a href="/repository/{value.name}" use:link>
+      <a href="/repository/{value.login}" use:link>
         <Avatar src="{value.avatarUrl}" alt="{value.login}" />
       </a>
       <div class="about--viewer-info">
