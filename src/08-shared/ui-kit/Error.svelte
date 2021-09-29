@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     gap: var(--gap-300);
-    height: var(--height);
+    min-height: var(--height);
   }
 
   div > p {
@@ -16,7 +16,7 @@
 <script lang="ts">
   export let message = "";
   export let title = "Упс, произошла ошибка!";
-  export let height = "20vh";
+  export let height = "25vh";
 </script>
 
 <div style="--height: {height}">

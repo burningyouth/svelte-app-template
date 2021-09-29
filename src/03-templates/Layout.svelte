@@ -1,23 +1,24 @@
 <style>
-  header {
+  .about {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--gap-200);
-    margin: var(--gap-400) 0;
+    padding-top: var(--gap-400);
   }
 
-  .viewer-info {
+  .about--viewer-info {
     text-align: right;
     display: flex;
     flex-direction: column;
     gap: var(--gap-200);
   }
 
-  main {
+  .content {
     display: flex;
     flex-direction: column;
     gap: var(--gap-400);
+    padding: var(--gap-400) 0;
     height: calc(100% - 128px);
   }
 
@@ -39,22 +40,26 @@
     height: 100%;
   }
 
-  :global(.main-content) {
-    padding-bottom: var(--gap-400);
+  .container {
+    position: relative;
+    max-width: var(--breakpoint-md);
+    padding: 0 var(--gap-300);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (max-width: 620px) {
-    header {
-      margin-top: var(--gap-200);
-      margin-bottom: var(--gap-200);
+    .about {
+      padding-top: var(--gap-300);
     }
 
-    .viewer-info {
+    .about--viewer-info {
       gap: var(--gap-100);
     }
 
-    main {
+    .content {
       gap: var(--gap-300);
+      padding: var(--gap-300) 0;
     }
   }
 </style>
@@ -62,7 +67,6 @@
 <script lang="ts">
   import { viewer } from "../07-entities/viewer";
   import Avatar from "../08-shared/ui-kit/Avatar.svelte";
-  import Container from "../08-shared/ui-kit/Container.svelte";
   import Telegram from "../08-shared/ui-kit/icons/Telegram.svelte";
   import Whatsapp from "../08-shared/ui-kit/icons/Whatsapp.svelte";
   import Github from "../08-shared/ui-kit/icons/Github.svelte";
@@ -72,21 +76,21 @@
   import { link } from "svelte-routing";
 </script>
 
-{#await viewer}
-  <div class="loader">
-    <Dots />
-  </div>
-{:then value}
-  <Container width="md" class="main-content">
-    <header>
-      <a href="/" use:link>
+<main class="container">
+  {#await viewer}
+    <div class="loader">
+      <Dots />
+    </div>
+  {:then value}
+    <section class="about">
+      <a href="/repository/{value.name}" use:link>
         <Avatar src="{value.avatarUrl}" alt="{value.login}" />
       </a>
-      <div class="viewer-info">
-        <h3>
+      <div class="about--viewer-info">
+        <h2>
           {value.name}
-        </h3>
-        {value.bio}
+        </h2>
+        <span class="about--viewer-info--bio">{value.bio}</span>
         <div class="social">
           {#if value.email}<a
               href="mailto:{value.email}"
@@ -108,11 +112,11 @@
           </a>
         </div>
       </div>
-    </header>
-    <main>
+    </section>
+    <section class="content">
       <slot />
-    </main>
-  </Container>
-{:catch error}
-  <Error message="{error.message}" />
-{/await}
+    </section>
+  {:catch error}
+    <Error message="{error.message}" />
+  {/await}
+</main>

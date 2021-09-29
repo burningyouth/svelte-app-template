@@ -1,13 +1,13 @@
 <style>
-  .title:first-letter {
+  .repo-item--title:first-letter {
     text-transform: uppercase;
   }
 
-  :global(.title-link) {
+  :global(.repo-item--title-link) {
     color: inherit;
   }
 
-  .content {
+  .repo-item--content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,22 +15,22 @@
     gap: var(--gap-300);
   }
 
-  .labels {
+  .repo-item--labels {
     display: flex;
     flex-wrap: wrap;
     gap: var(--gap-200);
   }
 
-  :global(.chip) {
+  :global(.repo-item--chip) {
     cursor: pointer;
   }
 
-  :global(.chip--link) {
+  :global(.repo-item--chip--link) {
     color: var(--colors-link) !important;
   }
 
   @media (max-width: 720px) {
-    .content {
+    .repo-item--content {
       flex-direction: column-reverse;
       align-items: flex-start;
       margin-top: var(--gap-300);
@@ -39,11 +39,10 @@
 </style>
 
 <script lang="ts">
-  import Chip from "../../08-shared/ui-kit/Chip.svelte";
+  import Chip from "../../../08-shared/ui-kit/Chip.svelte";
   import { createEventDispatcher } from "svelte";
   import { Link } from "svelte-routing";
-  import Skeleton from "../../08-shared/ui-kit/loaders/Skeleton.svelte";
-  import { currentRepository } from "../../07-entities/repositories";
+  import Skeleton from "../../../08-shared/ui-kit/loaders/Skeleton.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -57,46 +56,41 @@
   export let repoData: Repository;
 </script>
 
-<section {...$$restProps}>
-  <h2 class="title">
+<li {...$$restProps} class="repo-item">
+  <h2 class="repo-item--title">
     {#if loading}
       <Skeleton width="300px" />
     {:else}
-      <Link
-        class="title-link"
-        on:click="{() => {
-          $currentRepository = repoData;
-        }}"
-        to="/repository/{repoData.name}"
+      <Link class="repo-item--title-link" to="/repository/{repoData.name}"
         >{repoData.description}
       </Link>
     {/if}
   </h2>
 
-  <div class="content">
-    <div class="date">
+  <div class="repo-item--content">
+    <div class="repo-item--date">
       {#if loading}
         <Skeleton width="200px" />
-      {:else}{repoData.updatedAt}{/if}
+      {:else}{repoData.createdAt}{/if}
     </div>
     {#if !loading}
       {#if repoData.repositoryTopics.length}
-        <div class="labels">
+        <div class="repo-item--labels">
           {#each repoData.repositoryTopics as topic}
             <Chip
               on:click="{() => {
                 onTopicClick(topic.name);
               }}"
-              class="chip">
+              class="repo-item--chip">
               {topic.name}
             </Chip>
           {/each}
         </div>
       {/if}
     {:else}
-      <div class="labels">
+      <div class="repo-item--labels">
         <Skeleton width="150px" />
       </div>
     {/if}
   </div>
-</section>
+</li>

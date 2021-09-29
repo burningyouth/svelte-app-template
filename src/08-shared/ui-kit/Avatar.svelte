@@ -1,16 +1,16 @@
 <style>
   img {
-    width: 96px;
-    height: 96px;
+    width: 128px;
+    height: 128px;
     border-radius: 50%;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1000px) {
     img {
-      width: 80px;
-      height: 80px;
+      width: 96px;
+      height: 96px;
     }
   }
 </style>
 
-<img {...$$restProps} />
+<img alt="Avatar" {...$$restProps} />

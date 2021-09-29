@@ -1,13 +1,11 @@
 <script lang="ts">
   import { Route, Router } from "svelte-routing";
 
-  import RepositoriesListPage from "../02-pages/RepositoryListPage/RepositoriesListPage.svelte";
+  import RepositoriesListPage from "../02-pages/repositories/RepositoryListPage/RepositoriesListPage.svelte";
   import Layout from "../03-templates/Layout.svelte";
   import ErrorPage from "../08-shared/ui-kit/Error.svelte";
   import Button from "../08-shared/ui-kit/Button.svelte";
-  import RepositoryDetailPage from "../02-pages/RepositoryDetailPage.svelte";
-
-  export let theme: "light" | "dark" = "light";
+  import RepositoryDetailPage from "../02-pages/repositories/RepositoryDetailPage.svelte";
 </script>
 
 <Layout>

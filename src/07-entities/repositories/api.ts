@@ -28,7 +28,7 @@ export const getRepository = (
       resourcePath
       url
       description
-      repositoryTopics(first: 10)  {
+      repositoryTopics(first: 5)  {
         nodes {
           topic {
             name
@@ -52,7 +52,7 @@ export const getViewerRepositories = (): Promise<Repositories> => {
       .graphql(
         `{
   viewer {
-    repositories(first: 100, affiliations: [OWNER], orderBy: {field: CREATED_AT, direction: DESC}, privacy: PUBLIC) {
+    repositories(first: 25, affiliations: [OWNER], orderBy: {field: CREATED_AT, direction: DESC}, privacy: PUBLIC) {
       totalCount
       nodes{
         name
@@ -62,7 +62,7 @@ export const getViewerRepositories = (): Promise<Repositories> => {
         resourcePath
         url
         description
-        repositoryTopics(first: 10)  {
+        repositoryTopics(first: 5)  {
           nodes {
             topic {
               name

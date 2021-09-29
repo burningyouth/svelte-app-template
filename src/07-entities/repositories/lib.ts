@@ -23,7 +23,7 @@ export const normalizeViewerRepositoryResponse = (
   response: ViewerRepositoriesResponse
 ): Repositories => {
   const normalizedRepositories = response.viewer.repositories.nodes.map(
-    (item) => normalizeRawRepository(item)
+    normalizeRawRepository
   );
 
   return {
