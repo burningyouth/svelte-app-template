@@ -46,6 +46,7 @@
     padding: 0 var(--gap-300);
     margin-left: auto;
     margin-right: auto;
+    height: 100%;
   }
 
   @media (max-width: 620px) {
@@ -117,6 +118,6 @@
       <slot />
     </section>
   {:catch error}
-    <Error message="{error.message}" />
+    <Error message="{error.message}" height="100%" />
   {/await}
 </main>
