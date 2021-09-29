@@ -19,7 +19,6 @@
     flex-direction: column;
     gap: var(--gap-400);
     padding: var(--gap-400) 0;
-    height: calc(100% - 128px);
   }
 
   .social a {
