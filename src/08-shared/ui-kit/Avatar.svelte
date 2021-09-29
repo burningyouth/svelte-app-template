@@ -3,6 +3,7 @@
     width: 128px;
     height: 128px;
     border-radius: 50%;
+    box-shadow: 0 0 4px 0 var(--colors-grey-600);
   }
 
   @media (max-width: 1000px) {
