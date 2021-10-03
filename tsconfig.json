@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es2017"
+    "target": "es2017",
+    "isolatedModules": false
   },
   "extends": "@tsconfig/svelte/tsconfig.json",
   "include": [
